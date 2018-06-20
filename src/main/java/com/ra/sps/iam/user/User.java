@@ -1,8 +1,10 @@
 package com.ra.sps.iam.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +22,7 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long userId;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="Entitlement", joinColumns=@JoinColumn(name="userId"), inverseJoinColumns=@JoinColumn(name="entitlementId"))
 	List<Entitlement> entitlements;
 
@@ -37,7 +39,7 @@ public class User {
 	}
 
 	public List<Entitlement> getEntitlements() {
-		return entitlements;
+		return entitlements != null ? entitlements : new ArrayList<Entitlement>();
 	}
 
 	public void setEntitlements(List<Entitlement> entitlements) {

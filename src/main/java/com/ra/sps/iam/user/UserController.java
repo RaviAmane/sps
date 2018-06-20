@@ -25,4 +25,8 @@ public class UserController {
 		return userService.findById(userId);
 	}
 
+	@GetMapping("{userId}/entitlements")
+	List<String> getUserEntitlements(@PathVariable Long userId) {
+		return userService.getEntitlements(userId);
+	}
 }

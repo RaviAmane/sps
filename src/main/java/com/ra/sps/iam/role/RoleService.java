@@ -16,6 +16,10 @@ public class RoleService {
 	}
 
 	public Role findById(Long roleId) {
+		
+		if(null == roleId)
+			return null;
+		
 		return roleRepository.findById(roleId).orElse(null);
 	}
 
